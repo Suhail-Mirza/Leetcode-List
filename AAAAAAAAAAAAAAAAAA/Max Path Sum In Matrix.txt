@@ -1,0 +1,24 @@
+ int findMaxPath(int mat[][M]) 
+{ 
+	for (int i = 1; i < N; i++) { 
+		for (int j = 0; j < M; j++) { 
+
+			// When all paths are possible 
+			if (j > 0 && j < M - 1) 
+				mat[i][j] += max(mat[i - 1][j], 
+							max(mat[i - 1][j - 1], 
+							mat[i - 1][j + 1])); 
+
+			// When diagonal right is not possible 
+			else if (j > 0) 
+				mat[i][j] += max(mat[i - 1][j], 
+							mat[i - 1][j - 1]); 
+
+			// When diagonal left is not possible 
+			else if (j < M - 1) 
+				mat[i][j] += max(mat[i - 1][j], 
+							mat[i - 1][j + 1]); 
+
+			// Store max path sum 
+		} 
+	} 

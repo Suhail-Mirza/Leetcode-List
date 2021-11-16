@@ -1,0 +1,51 @@
+class Solution {
+public:
+    int dfs(vector<vector<int>>& grid,int i,int j,int id){
+        if(i>=grid.size() || j>=grid[0].size() || grid[i][j]!=1 || i<0 || j<0)return 0;
+        grid[i][j]=id;
+        int count=0;
+        count+=dfs(grid,i+1,j,id);
+        count+=dfs(grid,i,j+1,id);
+        count+=dfs(grid,i,j-1,id);
+        count+=dfs(grid,i-1,j,id);
+        return count+1 ;
+    }
+    
+    int largestIsland(vector<vector<int>>& grid) {
+        if(grid.size()==0)return 0;
+        unordered_map<int,int> umap;
+        int id=2;
+        int mx=0;
+        int m=grid.size(),n=grid[0].size();
+        
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(grid[i][j]==1){
+                    int size=dfs(grid,i,j,id);
+                    mx=max(mx,size);
+                    umap[id++]=size;
+                }
+            }
+        }
+        
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(grid[i][j]==0){
+                    unordered_set<int> uset;
+                    vector<vector<int>> directions={{1,0},{-1,0},{0,1},{0,-1}};
+                    for(vector<int> dir:directions){
+                        int x=dir[0]+i;
+                        int y=dir[1]+j;
+                        if(x>-1 && y>-1 && x<m && y<n && grid[i][j]!=1){
+                            uset.insert(grid[x][y]);
+                        }
+                    }
+                    int sum=1;
+                    for(int x:uset)sum+=umap[x];
+                    mx=max(mx,sum);
+                }
+            }
+        }
+        return mx;
+    }
+};

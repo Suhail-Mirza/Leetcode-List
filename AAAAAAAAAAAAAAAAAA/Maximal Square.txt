@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int dp[1001][1001];
+    int solve(vector<vector<char>> &mat,int i,int j,int m,int n){
+        if(i>=m||j>=n ||mat[i][j]=='0') return 0;
+        if(dp[i][j]!=-1) return dp[i][j];
+        int a=solve(mat,i+1,j+1,m,n);
+        int b=solve(mat,i+1,j,m,n);
+        int c=solve(mat,i,j+1,m,n);
+        dp[i][j]=min({a,b,c})+1;
+        return dp[i][j];
+    }
+    int maximalSquare(vector<vector<char>>& matrix) {
+        
+        int m=matrix.size();if(m==0) return 0;
+        int n=matrix[0].size();
+        memset(dp,-1,sizeof(dp));
+        int ans=0;
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(matrix[i][j]=='1'){
+                    ans=max(ans,solve(matrix,i,j,m,n));
+                }
+            }
+        }
+ 
+        return ans*ans;
+    }
+};
