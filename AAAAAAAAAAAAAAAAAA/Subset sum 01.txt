@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+	int n;
+	cin>>n;
+	int m;
+	cin>>m;
+	bool k[n+1][m+1];
+	int wt[n+1];
+	for(int i=0;i<n+1;i++)  // first one will be zero
+	     {
+		 cin>>wt[i];
+		 }  
+	for(int i=0;i<n+1;i++){
+	  k[i][0]=false;
+	  }
+	  for(int i=0;i<m+1;i++)
+	  k[0][i]=false;
+	  k[0][0]=true;
+		for(int i=1;i<=n;i++){
+		for(int w=1;w<=m;w++){
+			 if(w>=wt[i]){
+			 k[i][w]=(k[i-1][w-wt[i]]||k[i-1][w]);    // profit+goto upper row and remainining weight column 
+			}
+			else{
+				k[i][w]=k[i-1][w];
+			}
+		}
+	}
+	for(int i=0;i<=n;i++){
+		for(int w=0;w<=m;w++)
+         cout<<k[i][w];
+         cout<<endl;
+}}
+
+
+
+
+// to print the sequence take the profit and check in which last row it is present 
+// then deduct the profit and move to upper row and again check in which last row profit is present

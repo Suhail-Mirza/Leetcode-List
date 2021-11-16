@@ -1,0 +1,23 @@
+bool wordPattern(string pattern, string ss) {
+        int n=pattern.size();
+        if(n==0)return false;
+        unordered_map<string,char> umap;
+        stringstream s(ss);
+        string ans;
+        int i=0;
+        int count=0;
+        while(s>>ans){
+            if(umap.find(ans)==umap.end()){
+                umap[ans]=pattern[i];i++;count++;
+            }
+            else{
+                if(umap[ans]==pattern[i]){i++;continue;}
+                else return false;
+            }
+        }
+        vector<char> v;
+            for(int i=0;i<n;i++)
+                if(find(v.begin(),v.end(),pattern[i])==v.end())v.push_back(pattern[i]);
+        int c=v.size();
+        return count==c;
+    }

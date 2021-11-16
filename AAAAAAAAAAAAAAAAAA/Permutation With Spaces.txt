@@ -1,0 +1,34 @@
+#include<bits/stdc++.h>
+using namespace std;
+void solve(string op,string ip,int n){
+    if(ip.size()==0)
+    {cout<<op<<endl;return;}
+    string op1=op;
+    string op2=op;
+    op1=op1+" ";
+    op1=op1+ip[0];
+    op2=op2+ip[0];
+    ip=ip.substr(1,ip.size()-1);
+    solve(op1,ip,n);
+    solve(op2,ip,n);
+    return;
+}
+
+
+
+void pws(string s){
+    int n=s.size();
+    if(n==0)return;
+    string op;op.push_back(s[0]);
+    s=s.substr(1,s.size()-1);
+    solve(op,s,n);
+}
+
+
+
+int main() {
+	    string s;
+	    cin>>s;
+	    pws(s);
+	return 0;
+}

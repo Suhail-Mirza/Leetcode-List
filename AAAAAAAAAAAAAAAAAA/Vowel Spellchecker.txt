@@ -1,0 +1,45 @@
+class Solution {
+public:
+    
+    string tolow(string word){
+        for(auto &ch:word)
+            ch=tolower(ch);
+        return word;
+    }
+    
+    string tolowwithoutvowels(string word){
+        for(auto &ch:word){
+            if(ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u')
+                ch='-';
+        }
+        return word;
+    }
+    
+    vector<string> spellchecker(vector<string>& wordlist, vector<string>& queries) {
+        unordered_set<string> exact;
+        unordered_map<string,string> ci;
+        
+        vector<string> ans;
+        for(auto &word:wordlist){
+            exact.insert(word);
+            string s1 = tolow(word);
+            string s2 = tolowwithoutvowels(s1);
+            ci[s1] = word;
+            ci[s2] = word;
+        }
+        
+        for(auto &query:queries){
+            if(exact.count(query)) {ans.push_back(query); continue;}
+            
+            query=tolow(query);
+            if(ci.count(query)) {ans.push_back(ci[query]); continue;}
+            
+            query=tolowwithoutvowels(query);
+            if(ci.count(query)) {ans.push_back(ci[query]); continue;}
+            
+            ans.push_back("");
+        }
+        
+        return ans;
+    }
+};

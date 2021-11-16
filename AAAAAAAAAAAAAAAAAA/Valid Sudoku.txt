@@ -1,0 +1,31 @@
+class Solution {
+public:
+    bool isValidSudoku(vector<vector<char>>& board) {
+        
+        unordered_map<string,int> umap;
+        for(int i=0;i<9;i++){
+            for(int j=0;j<9;j++){
+                if(board[i][j]=='.')continue;
+                string st="row";
+                       st+=i;
+                       st+=board[i][j];
+                if(umap.find(st)!=umap.end())return false;
+                string st1="col";
+                       st1+=j;
+                       st1+=board[i][j];
+                if(umap.find(st1)!=umap.end())return false;
+                string st2="box";
+                       st2+=((i/3)*3)+(j/3);
+                       st2+=board[i][j];
+                if(umap.find(st2)!=umap.end())return false;
+                umap[st]++;
+                umap[st1]++;
+                umap[st2]++;
+            }
+        }
+        
+        
+        
+        return true;
+    }
+};

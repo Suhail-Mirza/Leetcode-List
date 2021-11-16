@@ -1,0 +1,31 @@
+class Solution {
+public:
+    void solve(vector<int>& nums,vector<int> vect,bool used[],vector<vector<int>>& res){
+        if(vect.size()==nums.size()){
+            res.push_back(vect);
+            return;
+        }
+        for(int i=0;i<nums.size();i++){
+            if(!used[i]){
+                if(i>0&&nums[i]==nums[i-1]&&used[i-1])continue;
+                vect.push_back(nums[i]);
+                used[i]=true;
+                solve(nums,vect,used,res);
+                vect.pop_back();
+                used[i]=false;
+            }
+        }  
+    }
+    
+    vector<vector<int>> permuteUnique(vector<int>& nums) {
+        vector<vector<int>> res;
+        int n=nums.size();
+        if(n==0)return res;
+        vector<int> vect;
+        bool used[n];
+        for(int i=0;i<n;i++)used[i]=false;
+        sort(nums.begin(),nums.end());
+        solve(nums,vect,used,res);
+        return res;
+    }
+};

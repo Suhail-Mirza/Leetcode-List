@@ -1,0 +1,28 @@
+ class Solution {
+public:
+    int dp[1000];
+    
+    int help(vector<int> days,vector<int> costs,int i){
+        if(i>=days.size())return 0;
+        if(dp[i]!=-1)return dp[i];
+        int op1=costs[0]+help(days,costs,i+1);
+        int k=i;
+        for(;k<days.size();k++){
+            if(days[k]>=days[i]+7)break;
+        }
+        int op2=costs[1]+help(days,costs,k);
+        for(;k<days.size();k++){
+            if(days[k]>=days[i]+30)break;
+        }
+        int op3=costs[2]+help(days,costs,k);
+        return dp[i]=min({op1,op3,op2});
+    }
+    
+    
+    
+    
+    int mincostTickets(vector<int>& days, vector<int>& costs) {
+        memset(dp,-1,sizeof(dp));
+        return help(days,costs,0);
+    }
+};

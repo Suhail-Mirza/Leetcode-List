@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+using namespace std;
+int min(int x, int y){
+	if(x<y)
+	return x;
+	else
+	return y;
+}
+
+vector<int> vect;
+void subset(int range, int wt[],int n){
+	bool k[n+1][range+1];
+	for(int i=0;i<range+1;i++)
+	k[0][i]=false;
+	for(int i=0;i<n+1;i++)
+	k[i][0]=true;
+	
+	for(int i=0;i<=n;i++){
+		for(int w=0;w<=range;w++){
+			if(i==0||w==0){
+			 k[i][w]=false;}
+			else if(w>=wt[i]){
+			 k[i][w]=(k[i-1][w-wt[i]]||k[i-1][w]);    // profit+goto upper row and remainining weight column 
+			}
+			else{
+				k[i][w]=k[i-1][w];
+			}
+		}
+	for(int i=0;i<range+1;i++){
+		if(k[n][i]==true)
+		vect.push_back(i);
+	}
+	
+}}
+
+
+
+int main(){
+	int n;
+	cin>>n;
+	int wt[n+1];
+	for(int i=0;i<n+1;i++)  // first one will be zero
+	     {
+		 cin>>wt[i];
+		 }          //     increse size by 1 of all arrays and insert 0
+	int range=0;
+	for(int i=0;i<n+1;i++)
+	range=range+wt[i];
+	subset(range,wt,n);
+	int mn=100;
+	for(auto i=vect.begin();i!=vect.end();i++){
+		int x=min(mn,abs(range-2*(*i)));
+		if(x<mn)
+		mn=x;
+		cout<<mn;
+	}cout<<endl<<mn;
+}
+
+

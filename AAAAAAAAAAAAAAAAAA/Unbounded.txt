@@ -1,0 +1,3 @@
+just one difference
+
+t[i][j] = max(  p[i] + t[i][w-wt[i]] , t[i-1][j])

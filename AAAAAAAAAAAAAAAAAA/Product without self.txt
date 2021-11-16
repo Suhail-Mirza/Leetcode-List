@@ -1,0 +1,21 @@
+class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+        vector<int> ans=nums;
+        
+        for(int i=1;i<nums.size();i++)
+            ans[i]=ans[i-1]*nums[i];
+        
+        int n=nums.size()-1;
+        int product=nums[n];
+        ans[n]=ans[n-1];
+        cout<<"efeaf";
+        for(int i=n-1;i>0;i--){
+            ans[i]=ans[i-1]*product;
+            product*=nums[i];
+        }
+        ans[0]=product;
+        
+        return ans;        
+    }
+};

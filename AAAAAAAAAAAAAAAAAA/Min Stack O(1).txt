@@ -1,0 +1,36 @@
+class MinStack {
+public:
+    stack<long> s;
+        long mine;
+    MinStack() {
+        
+    }
+    
+    void push(int x) {
+        if(s.size()==0){s.push(x);mine=x;}
+        else{
+            if(x>=mine)s.push(x);
+            else if(x<mine){int t=2*x-mine;s.push(t);mine=x;}
+        }
+    }
+    
+    void pop() {
+        if(s.size()==0)return;
+        if(s.top()>=mine){s.pop();}
+        else{
+            mine=2*mine-s.top();
+            s.pop();
+        }
+    }
+    
+    int top() {
+        if(s.size()==0)return -1;
+        if(s.top()>=mine)return s.top();
+        else{return 2*mine-s.top();}
+    }
+    
+    int getMin() {
+        if(s.size()==0)return -1;
+        return mine;
+    }
+};

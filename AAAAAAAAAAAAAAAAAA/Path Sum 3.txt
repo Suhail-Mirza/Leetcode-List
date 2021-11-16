@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int ans=0;
+    unordered_map<int ,int> umap; 
+    void help(TreeNode* root,int sum,int curr){
+        if(root==NULL)return;
+        int x=curr+root->val;
+        if(umap.find(x-sum)!=umap.end())ans+=umap[x-sum];
+        umap[x]++;
+        help(root->left,sum,x);
+        help(root->right,sum,x);
+        umap[x]--;
+        
+    }
+    
+    int pathSum(TreeNode* root, int sum) {
+       if(root==NULL)return 0;
+        umap[0]=1;
+        help(root,sum,0);
+        return ans;
+    }
+};

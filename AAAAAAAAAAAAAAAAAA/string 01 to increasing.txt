@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int minFlipsMonoIncr(string s) {
+        int st=0;
+        int e=s.size()-1;
+        while(st<s.size() && s[st]=='0')st++;
+        while(e>-1 && s[e]=='1')e--;
+        
+        int one=0;
+        int flip=0;
+        if(e<st)return 0;
+        
+        for(int i=st;i<=e;i++){
+            if(s[i]=='0')flip++;
+            else one++;
+            
+            if(flip>one)
+                flip=one;
+        }
+        
+        return flip;
+        
+    }
+};

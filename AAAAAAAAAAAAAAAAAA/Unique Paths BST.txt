@@ -1,0 +1,33 @@
+class Solution {
+public:
+    
+    vector<TreeNode*> help(int start,int end){
+        if(start>end)
+            return {NULL};
+        if(start==end){
+            TreeNode* x=new TreeNode(start);
+            return {x};
+        }
+        
+        vector<TreeNode*> link;
+        for(int i=start;i<=end;i++){
+            vector<TreeNode*> left=help(start,i-1);
+            vector<TreeNode*> right=help(i+1,end);
+            
+            for(auto lroot:left){
+                for(auto rroot:right){
+                    TreeNode* root=new TreeNode(i);
+                    root->left=lroot;
+                    root->right=rroot;
+                    link.push_back(root);
+                }
+            }
+        }
+        
+        return link;
+    }
+    
+    vector<TreeNode*> generateTrees(int n) {
+     return help(1,n);   
+    }
+};

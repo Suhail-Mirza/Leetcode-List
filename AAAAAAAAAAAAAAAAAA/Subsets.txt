@@ -1,0 +1,21 @@
+vector<vector<int>> subsets(vector<int>& nums) {
+        vector<vector<int>> result;
+        vector<int> v;
+        int n=nums.size();
+        for(int i=0;i<n;i++){
+            int m=result.size();
+            result.push_back({nums[i]});
+            
+            for(int j=0;j<m;j++){
+            v=result[j];
+            v.push_back(nums[i]);
+            result.push_back(v);    
+                
+                
+            }
+            
+        }
+        
+        result.push_back({});
+        return result;
+    }

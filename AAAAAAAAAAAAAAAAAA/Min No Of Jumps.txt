@@ -1,0 +1,19 @@
+ int jump(vector<int>& nums) {
+        int size=nums.size();
+        if(size<2)
+            return 0;
+    int current=0;int prev=-1;
+        int jump=0;
+        for(int i=0;i<size-1;i++){
+            if(current>=size-1)
+                break;
+            if(i>prev){
+                jump++;
+                prev=current;
+            }
+            current=max(current,nums[i]+i);
+            
+            
+        }
+return jump;    
+    }

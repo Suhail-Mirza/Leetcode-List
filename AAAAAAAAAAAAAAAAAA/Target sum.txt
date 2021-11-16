@@ -1,0 +1,1 @@
+same as count the no of ubsets with given difference

@@ -1,0 +1,28 @@
+ListNode* reverseBetween(ListNode* head, int m, int n) {
+        if(head == NULL) return nullptr;
+        if(m==n) return head;
+        ListNode* tmp=NULL;ListNode* current=head;ListNode* prev=NULL;
+        while(m>1){
+            prev=current;
+            current=current->next;
+            m--;n--;
+        }
+        ListNode* tail=current;ListNode* connecting=prev;
+        while(n>0){
+            tmp=current->next;
+            current->next=prev;
+            prev=current;
+            current=tmp;
+            n--;
+        }
+        if(connecting==NULL)head=prev;
+        else connecting->next=prev;
+        tail->next=current;
+        return head;
+        
+        
+    }
+
+
+
+

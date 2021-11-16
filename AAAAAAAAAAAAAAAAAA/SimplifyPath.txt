@@ -1,0 +1,19 @@
+string simplifyPath(string path) {
+        int n=path.size();
+        if(n==0)return path;
+        stack<string> st;
+        string ans;
+        stringstream ss(path);
+        while(getline(ss,ans,'/')){
+            if(ans==""||ans==".")continue;
+            if(ans==".."&&st.empty()==0)st.pop();
+            else if(ans!="..")st.push(ans);
+        } 
+        string f;
+        while(!st.empty()){
+            f="/"+st.top()+f;
+            st.pop();
+        }
+        if(f=="")return "/";
+        return f;
+    }

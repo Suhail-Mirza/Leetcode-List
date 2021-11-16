@@ -1,0 +1,25 @@
+void find_p_s(Node* root,int a, 
+			Node** p, Node** q) 
+{ 
+	
+	// root data is greater than a 
+	if(root&&root->data > a) 
+	{ 
+		
+		// q stores the node whose data is greater 
+		// than a and is smaller than the previously 
+		// stored data in *q which is sucessor 
+		if((!*q) || (*q) && (*q)->data > root->data) 
+				*q = root; 
+	} 
+	
+	// if the root data is smaller than 
+	// store it in p which is predecessor 
+	else if(root && root->data < a) 
+	{ 
+		*p = root; 
+	} 
+	
+	// traverse the right subtree 
+	find_p_s(root->right, a, p, q); 
+} 

@@ -1,0 +1,20 @@
+void morrisTraversalPreorder(node* root)
+{
+    while (root)
+    {
+        // If left child is null, print the current node data. Move to
+        // right child.
+        if (root->left == NULL)
+        {
+            cout<<root->data<<" ";
+            root = root->right;
+        }
+        else
+        {
+            find root->left most right node
+            temp->right=root->right
+            root->right=null 
+           root=root->left
+        }
+    }
+}

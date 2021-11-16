@@ -1,0 +1,28 @@
+v1 : maximum value robbed without taking root node
+v2 : maximum value robbed by taking root node
+
+lv1 : maximum value robbed without taking root->left node
+lv2 : maximum value robbed by taking root->left node
+rv1 : maximum value robbed without taking root->right node
+rv2 : maximum value robbed by taking root->right node
+
+v1 = max(lv1, lv2) + max(rv1, rv2);
+maximum value robbed without taking root node is maximum available from left subtree with or without taking left node + maximum available from right subtree with or without taking right node.
+
+v2 = root->val + lv1 + rv1;
+maximum value robbed by taking root node is sum of values available without taking left and right node + node value
+
+    void helper(TreeNode *root, int& v1, int& v2){
+        if(!root)
+            return;
+        int lv1 = 0, lv2 = 0, rv1 = 0, rv2 = 0;
+        helper(root->left, lv1, lv2);
+        helper(root->right, rv1, rv2);
+        v1 = max(lv1, lv2) + max(rv1, rv2);
+        v2 = root->val + lv1 + rv1;
+    }
+    int rob(TreeNode* root) {
+        int v1 = 0, v2 = 0;
+        helper(root, v1, v2);
+        return max(v1, v2);
+    }

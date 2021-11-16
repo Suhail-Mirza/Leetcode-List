@@ -1,0 +1,27 @@
+traverse from right 
+find a[i]<a[i+1]
+traverse again 
+find a[i]>a[index1]
+swap a[index1],a[index2]
+reverse everything after index1
+
+int  i = nums.size() - 2;
+    while(i >= 0 && nums[i] >= nums[i+1]){
+            --i;
+    }
+		//if elements are in descending order then no next permutation possible do print                                       elment in reverse order ie ascending order
+		
+    if(i < 0)
+        reverse(nums.begin(),nums.end());
+    
+    else{
+        //need to find smallest greater element to the right to our found conflicting                  number so we would start from right side then check if any element just greater              than 
+        int j = nums.size() - 1;
+        while(j >= 0 && nums[i] >= nums[j])
+            --j;
+        //after finding swap ith and jth position
+        swap(nums[i],nums[j]);
+        
+        reverse(nums.begin()+i+1,nums.end());  
+    }
+}

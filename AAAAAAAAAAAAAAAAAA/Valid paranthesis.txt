@@ -1,0 +1,17 @@
+ bool isValid(string s) {
+        int n=s.size();
+        stack<char> sd;
+        for(int i=0;i<n;i++){
+            if(s[i]=='('||s[i]=='{'||s[i]=='['){sd.push(s[i]);continue;}
+            if(sd.size()==0)return false;
+            char x=sd.top();
+            if(s[i]==')' && x=='(') sd.pop();
+            else if (s[i]=='}' && x=='{') sd.pop();
+            else if (s[i]==']'&& x=='[') sd.pop();
+            else return false;
+            
+        }
+        if(sd.size()==0)return true;
+        return false;
+    }
+};

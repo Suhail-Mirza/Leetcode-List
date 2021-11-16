@@ -1,0 +1,22 @@
+class Solution {
+public:
+    
+    vector<int> help(TreeNode* root){
+        vector<int> x(3,0);
+        if(root==NULL)return x;
+        
+        vector<int> left=help(root->left);
+        vector<int> right=help(root->right);
+        
+        x[0]=left[1]+1,
+        x[1]=right[0]+1;
+        x[2]=max(left[1]+1,right[0]+1);
+        x[2]=max({x[2],left[2],right[2]});         
+        return x;
+    }
+    
+    int longestZigZag(TreeNode* root) {
+        vector<int> x=help(root);
+        return x[2]-1;
+    }
+};

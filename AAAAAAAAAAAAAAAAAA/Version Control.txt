@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int compareVersion(string version1, string version2) {
+        istringstream iss1(version1), iss2(version2);
+        string tmp1, tmp2;
+        int n1 = 0, n2 = 0;
+        while (1) {
+            getline(iss1, tmp1, '.');
+            getline(iss2, tmp2, '.');
+			// if the two strings didn't change, this means that the two streams have come to end
+            if (tmp1.empty() && tmp2.empty())
+                break;
+            n1 = (tmp1.empty()) ? 0 : stoi(tmp1);
+            n2 = (tmp2.empty()) ? 0 : stoi(tmp2);
+            if (n1 > n2)
+                return 1;
+            else if (n1 < n2)
+                return -1;
+			// clear the two strings to know which one has changed after reading from the streams	
+            tmp1 = "", tmp2 = "";
+        }
+        return 0;
+    }
+};
