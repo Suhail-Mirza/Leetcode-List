@@ -1,0 +1,19 @@
+2 schemes k=i to j-1    i to k   k+1 to j
+                k=i+1 to j   i to k-1  k to j
+
+
+ follow first scheme
+
+
+
+int solve(int arr[] , int i , int j){
+if(i>=j)return 0;
+int temp=0;
+for(int k=i;k<=j-1;k++){
+temp = solve(arr, i, k )+solve(arr,k+1;j) + arr[i-1]*arr[k]*arr[j];
+if(mn>temp)
+mn=temp;
+
+}
+return mn;
+}

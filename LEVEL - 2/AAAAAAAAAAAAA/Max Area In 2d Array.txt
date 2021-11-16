@@ -1,0 +1,15 @@
+divide 2d array in 1d array 
+use MAH
+and find the maximum area
+0110
+1111
+1111
+1100
+
+ths the is array then split the 2d array into 4 subarrays 
+first 0110
+second 0110
+           1111     1221
+and so on 
+
+find the max one and that is the answer

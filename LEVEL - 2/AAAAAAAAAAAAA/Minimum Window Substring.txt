@@ -1,0 +1,50 @@
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        unordered_map<char,int> umap2;
+        unordered_map<char,int> umap1;
+        string ans="";
+        
+        for(int k=0;k<t.size();k++)
+            umap2[t[k]]++;
+        
+        int count=0;
+        int dcount=t.size();
+        int n=s.size()-1;
+        
+        int i=-1;
+        int j=-1;
+        while(1){
+            bool f1=false;
+            bool f2=false;
+            //acquire
+            while(i<n && count<dcount){
+                f1=true;
+                i++;
+                umap1[s[i]]++;
+                if(umap2.find(s[i])!=umap2.end() && umap1[s[i]]<=umap2[s[i]])
+                    count++;
+                cout<<i;
+            }
+            //collect answer and release
+            while(j<i && count==dcount){
+                f2=true;
+                string temp=s.substr(j+1,i-j);
+                if(ans.size()==0 || temp.size()<ans.size())
+                    ans=temp;
+            
+            j++;
+            if(umap1[s[j]]==1)umap1.erase(s[j]);
+            else umap1[s[j]]--;
+            
+            if(umap2.find(s[j])!=umap2.end() && 
+               umap1.find(s[j])!=umap1.end() && umap1[s[j]]<umap2[s[j]])          
+                count--;
+                                                                           
+           }
+            if(f1==false ||f2==false)break;
+        }
+        cout<< i<<"  "<<j;
+        return ans;
+    }
+};

@@ -1,0 +1,50 @@
+class Solution {
+public:
+    unordered_map<TreeNode*,TreeNode*> parent;
+    void dfs(TreeNode* root){
+        if(root==NULL)return;
+        if(root->left){parent[root->left]=root;dfs(root->left);}
+        if(root->right){parent[root->right]=root;dfs(root->right);}
+    }
+    
+    vector<int> distanceK(TreeNode* root, TreeNode* target, int K) {
+        vector<int> v;
+        
+        dfs(root);
+        
+        queue<TreeNode*> q;
+        q.push(target);
+        q.push(NULL);
+        unordered_map<TreeNode*,bool> visit;
+        for(int i=0;i<K;i++){
+            TreeNode* temp=q.front();
+            q.pop();
+            visit[temp]=true;
+            while(temp!=NULL){
+                if(temp->left&&visit[temp->left]!=true){
+                    q.push(temp->left);
+                    visit[temp->left]=true;
+                }
+                if(temp->right&&visit[temp->right]!=true){
+                    q.push(temp->right);
+                    visit[temp->right]=true;
+                }
+                if(visit[parent[temp]]!=true){
+                    q.push(parent[temp]);
+                    visit[parent[temp]]=true;
+                }
+                temp=q.front();
+                q.pop();
+                if(temp==NULL){q.push(NULL);}
+            }
+        }
+        while(q.size()!=0){
+            TreeNode* t=q.front();q.pop();
+            if(t==NULL){continue;}
+            int x=t->val;
+            v.push_back(x);
+        }
+        
+        return v;
+    }
+};

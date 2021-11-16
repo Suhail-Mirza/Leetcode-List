@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int table[10][10];
+
+bool ispalindrome(int i,int j,string s){
+	bool x=true;
+	while(i<j){
+		if(s[i]==s[j]){
+			i++;j--;
+		}
+		if(s[i]!=s[j])
+		  {
+		  	x=false;
+		  	break;
+		  }
+	} return x;
+	
+}
+
+
+int MCM(int i, int j,string s)
+{
+    if(i>=j) return 0;
+    if(ispalindrome(i,j,s)){
+    	return 0;
+	}
+    if(table[i][j]!=0)return table[i][j];
+    
+        int min = INT_MAX;
+
+        for(int k=i;k<j;k++)
+        {
+            if(table[i][k]==0)
+                table[i][k] = MCM(i,k,s);
+            if(table[k+1][j]==0)
+                table[k+1][j] = MCM(k+1,j,s);
+            int sum = table[i][k] + table[k+1][j] + 1;
+            if(sum<min)
+            {
+                min = sum;
+                
+            }
+       }table[i][j] = min;
+       return min;
+   
+}
+
+int main()
+{   
+    string s;
+    cin>>s;
+    int n=s.length();
+	for(int i=0;i<10;i++)
+    for(int j=0;j<10;j++)
+    table[i][j]=0;
+    printf("Minimum number of mutiplications is %d",MCM(0,n-1,s));
+    return 0;
+}

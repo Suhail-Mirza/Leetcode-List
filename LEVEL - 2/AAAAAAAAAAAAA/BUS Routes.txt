@@ -1,0 +1,50 @@
+class Solution {
+public:
+    int numBusesToDestination(vector<vector<int>>& rt, int src, int tar) {
+        int n=rt.size();
+        // rt->bus no, rt[i][j]->bus-stop-no 
+        // make a hashmap for bus-stop->bus-no
+        unordered_map<int,vector<int>> umap;
+        unordered_set<int> uset;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<rt[i].size();j++){
+                umap[rt[i][j]].push_back(i);
+                uset.insert(rt[i][j]);
+                 }
+        }
+        
+        vector<bool> bus_stop(uset.size(),false);
+        vector<bool> bus_no(n,false);
+        queue<int> q;
+        
+        int level=0;
+        q.push(src);
+        bus_stop[src]=true;
+        
+        while(q.size()>0){
+            int sze=q.size();
+            while(sze-->0){
+                int rm=q.front();
+                q.pop();
+                if(rm==tar)return level;
+                //take out buses
+                vector<int> buses=umap[rm];
+                for(int bus : buses){
+                    if(bus_no[bus])continue;
+                    
+                    vector<int> arr=rt[bus];
+                    for(int stops:arr){
+                        if(bus_stop[stops])continue;
+                        q.push(stops);
+                        bus_stop[stops]=true;
+                    }
+                    bus_no[bus]=true;
+                }
+                
+            }
+            level++;
+        }
+        
+        return -1;
+    }
+};
