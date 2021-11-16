@@ -1,0 +1,19 @@
+class Solution {
+public:
+   TreeNode* help(vector<int>& nums,int left,int right){
+       if(left>right)return NULL;
+       int mid=left+(right-left)/2;
+       TreeNode* current = new TreeNode(nums[mid]);
+       current->left=help(nums,left,mid-1);
+       current->right=help(nums,mid+1,right);
+           return current;
+   }
+    
+    
+    
+    
+    TreeNode* sortedArrayToBST(vector<int>& nums) {
+     if(nums.size()==0)return NULL;
+        return help(nums,0,nums.size()-1);
+    }
+};

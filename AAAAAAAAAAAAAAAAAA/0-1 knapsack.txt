@@ -1,0 +1,37 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+	int n;
+	cin>>n;
+	int m;
+	cin>>m;
+	int k[n+1][m+1];
+	int wt[n+1],p[n+1];
+	for(int i=0;i<n+1;i++)  // first one will be zero
+	     {
+		 cin>>wt[i];
+		 cin>>p[i];
+		 }          //     increse size by 1 of all arrays and insert 0
+	for(int i=0;i<=n;i++){
+		for(int w=0;w<=m;w++){
+			if(i==0||w==0){
+			 k[i][w]=0;}
+			else if(w>=wt[i]){
+			 k[i][w]=max(p[i]+k[i-1][w-wt[i]],k[i-1][w]);    // profit+goto upper row and remainining weight column 
+			}
+			else{
+				k[i][w]=k[i-1][w];
+			}
+		}
+	}
+	for(int i=0;i<=n;i++){
+		for(int w=0;w<=m;w++)
+         cout<<k[i][w];
+         cout<<endl;
+}}
+
+
+
+
+// to print the sequence take the profit and check in which last row it is present 
+// then deduct the profit and move to upper row and again check in which last row profit is present

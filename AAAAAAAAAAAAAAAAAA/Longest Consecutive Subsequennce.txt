@@ -1,0 +1,38 @@
+int longestConsecutive(vector<int>& nums) {
+        
+        unordered_map<int,int> umap;
+        int n=nums.size();
+        if(n==0)return 0;
+        if(n==1)return 1;
+        for(int i=0;i<n;i++){
+            if(umap.find(nums[i])==umap.end())
+            {
+                umap[nums[i]]=1;
+            }  }
+        
+          int mx=1;
+            for(int i=0;i<n;i++){
+                if(umap.find(nums[i]-1)!=umap.end())
+                umap[nums[i]]=0;
+            }
+        
+          for(int i=0;i<n;i++){
+              if(umap[nums[i]]==1){
+                  int count=0;
+                  int j=nums[i];
+                  while(umap.find(j)!=umap.end()){
+                      j++;
+                      count++;if(mx<count)mx=count;
+                      
+                  }
+                }  
+          }    
+        
+        
+        return mx;
+    }
+
+
+
+// first insert everything in map and insert 1
+then trverse and make false every nums[i]-1 for nums[i] because we have  better choice

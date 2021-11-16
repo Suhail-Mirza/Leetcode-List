@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int maxProfit(vector<int>& prices, int fee) {
+        int bsp=-prices[0];
+        int ssp=0;
+        
+        for(int i=1;i<prices.size();i++){
+            int nbsp=0;
+            int nssp=0;
+            
+            if(ssp-prices[i]>bsp)
+                nbsp=ssp-prices[i];
+            else
+                nbsp=bsp;
+            
+            if(prices[i]+bsp-fee>ssp)
+                nssp=prices[i]+bsp-fee;
+            else 
+                nssp=ssp;
+            
+            ssp=nssp;
+            bsp=nbsp;
+        }
+        
+        return ssp;
+    }
+};

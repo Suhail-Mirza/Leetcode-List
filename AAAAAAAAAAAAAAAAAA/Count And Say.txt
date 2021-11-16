@@ -1,0 +1,27 @@
+class Solution {
+public:
+    string findnextterm(string dude){
+        string result="";
+        int count=1;
+        for(int i=1;i<dude.size();i++){
+            if(dude[i]==dude[i-1]){
+                count++;
+            }
+            else{
+                result += to_string(count);
+                result.push_back(dude[i-1]);
+                count = 1;
+            }
+        }
+        result += to_string(count);
+        result.push_back(dude.back());
+        return result;
+    }
+    string countAndSay(int n) {
+        string result="1";
+        for(int i=1;i<n;i++){
+            result = findnextterm(result);
+        }
+        return result;
+    }
+};

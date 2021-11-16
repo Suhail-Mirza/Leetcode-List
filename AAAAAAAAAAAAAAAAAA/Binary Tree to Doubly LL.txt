@@ -1,0 +1,19 @@
+void BinaryTree2DoubleLinkedList(node *root, node* &head,node* &tail) 
+{  
+    if (root == NULL) return; 
+  
+    BinaryTree2DoubleLinkedList(root->left, head,tail); 
+  
+    // Now convert this node 
+    if (head == NULL) 
+        head = root;
+        tail=root; 
+    else
+    { 
+        root->left = tail; 
+        tail->right = root;
+        tail=root; 
+    } 
+    
+  BinaryTree2DoubleLinkedList(root->right, head,tail); 
+} 

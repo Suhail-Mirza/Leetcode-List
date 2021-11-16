@@ -1,0 +1,18 @@
+  class Solution {
+public:
+    int maximumSum(vector<int>& arr) {
+        if(arr==x)return -1;
+        int n=arr.size();
+        int pnd=arr[0];
+        int pd=0;
+        int mx=arr[0];
+        
+        for(int i=1;i<n;i++){
+            pd=max(pnd,pd+arr[i]);
+            pnd=max(pnd+arr[i],arr[i]);
+            mx=max({pd,pnd,mx});
+        }
+        
+        return mx;
+    }
+};

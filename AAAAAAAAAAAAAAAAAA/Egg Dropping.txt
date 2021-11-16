@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int twoEggDrop(int f,int e=2){
+        if(f==0||f==1)
+            return f;
+        if(e==0||e==1)
+            return f;
+        
+        int mn=INT_MAX;
+        for(int k=1;k<=f;k++){
+            int temp=1+max(twoEggDrop(k-1,e-1),twoEggDrop(f-k,e));
+            mn=min(mn,temp);
+        }
+        
+        return mn;
+    }
+};

@@ -1,0 +1,27 @@
+vector<string> s;
+   void solve(int op,int cl, string st){
+       if(op==0&&cl==0){s.push_back(st);return;}
+       if(op!=0){
+           string st1=st;
+           st1+="(";
+           solve(op-1,cl,st1);
+           
+           
+       }
+       if(cl>op){
+           string st2=st;
+           st2+=")";
+           solve(op,cl-1,st2);
+           
+           
+       }return;
+   }
+    
+    
+    vector<string> generateParenthesis(int n) {
+        string o="(";
+        solve(n-1,n,o);
+        
+        
+        return s;
+    }

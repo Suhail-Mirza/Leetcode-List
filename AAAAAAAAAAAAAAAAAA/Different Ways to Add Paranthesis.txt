@@ -1,0 +1,25 @@
+class Solution {
+public:
+    vector<int> diffWaysToCompute(string ex) {
+        vector<int> res;
+        for(int i=0;i<ex.size();i++){
+            char c=ex[i];
+            if(c=='+'||c=='-'||c=='*'){
+                string a=ex.substr(0,i);
+                string b=ex.substr(i+1,ex.size()-i-1);
+                vector<int> a1=diffWaysToCompute(a);
+                vector<int> b1=diffWaysToCompute(b);
+                for(int x:a1){
+                    for(int y:b1){
+                        if(c=='-')res.push_back(x-y);
+                        if(c=='+')res.push_back(x+y);
+                        if(c=='*')res.push_back(x*y);
+                    }
+                }
+                
+            }
+        }
+        if(res.size()==0)return {stoi(ex)};
+        return res;
+    }
+};

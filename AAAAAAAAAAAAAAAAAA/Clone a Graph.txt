@@ -1,0 +1,25 @@
+class Solution {
+public:
+    unordered_map<Node*,Node*> clones;
+    Node* cloneGraph(Node* node) {
+        if(node==NULL)
+            return NULL;
+        Node* currClone=new Node(node->val,{});
+        clones[node]=currClone;
+        queue<Node*> nodes;
+        nodes.push(node);
+        while(!nodes.empty()){
+            Node* currNode=nodes.front();
+            nodes.pop();
+            for(Node* currNeighbour : currNode->neighbors){
+                
+                if(clones.find(currNeighbour)==clones.end()){
+                    clones[currNeighbour]=new Node(currNeighbour->val,{});
+                    nodes.push(currNeighbour);
+                }
+                clones[currNode]->neighbors.push_back(clones[currNeighbour]);
+            }
+        }
+        return currClone;
+    }
+};

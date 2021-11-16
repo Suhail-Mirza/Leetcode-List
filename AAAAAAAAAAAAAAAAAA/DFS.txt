@@ -1,0 +1,41 @@
+#include<bits/stdc++.h>
+using namespace std;
+int n;
+vector<pair<int,int>> X;
+void GraphEdge(vector<pair<int,int>> adj[],int in, int t, int w){
+	adj[in].push_back(make_pair(t,w));
+}
+int *v = new int[n];
+void DFS(int s,vector<pair<int,int>> adj[], int v[])
+{   
+    v[s] = 1;
+    cout << s << " ";
+    for (auto i=adj[s].begin();i<adj[s].end();i++)
+    {   int x=i->first;
+        if (v[x] == 0)
+            DFS(x,adj,v);
+    }
+}   
+
+int main(){
+	cout<<"Enter the no of vertices"<<endl;
+	cin>>n;
+    cout<<"Enter the no of edges"<<endl;
+	int e;
+	cin>>e;
+	int in,t,w;
+	vector<pair<int,int>> adj[n];
+	for(int i=0;i<e;i++){
+		cout<<"From"<<endl;	
+		cin>>in;
+		cout<<"To"<<endl;
+		cin>>t;
+		//cout<<"Enter the weight"<<endl;
+		GraphEdge(adj,in,t,3);
+		}
+		
+    int x;
+	for(int i=0; i<n ;i++) 
+		v[i]=0;  
+		DFS(0,adj,v); 
+}

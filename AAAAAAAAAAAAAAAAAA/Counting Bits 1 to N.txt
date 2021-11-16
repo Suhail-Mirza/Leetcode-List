@@ -1,0 +1,23 @@
+class Solution {
+public:
+    vector<int> countBits(int num) {
+        
+        vector<int>kanishk(num+1);
+        kanishk[0]=0;
+        if(num==0)
+            return kanishk;
+        kanishk[1]=1;
+        if(num==1)
+            return kanishk;
+        int a;
+        for(a=2;a<=num;a++){
+            if(a%2==0){
+                kanishk[a]=kanishk[a/2];
+            }
+            else{
+                kanishk[a]=kanishk[a/2]+1;
+            }
+        }
+        return kanishk;
+    }
+};

@@ -1,0 +1,1 @@
+search for subsets with sum = differenve + total sum / 2 

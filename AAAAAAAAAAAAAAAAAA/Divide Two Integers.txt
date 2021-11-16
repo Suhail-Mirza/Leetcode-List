@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int divide(int dividend, int divisor) {
+     int a=0;
+     long long d=dividend;
+     long long p=divisor;
+     if(dividend<0)
+     {
+         p*= -1;
+         a++;
+     }
+     if(divisor<0)
+     {
+         d*=-1;
+         a++;
+     }
+        long long val=d/p;
+        if(a&1)
+        {
+            val*=-1;
+        }
+        
+        if(val>INT_MAX)
+            return INT_MAX;
+         if(val<INT_MIN)
+             return INT_MIN;
+        
+        return val;
+    }
+};

@@ -1,0 +1,16 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+	int x[100];
+	int i=0;
+	while(1){
+		string s;
+		getline(cin,s);
+		if(s.size()==0)break;
+		int t;
+		t=stoi(s);
+		x[i]=t;
+		i++;
+	}
+	for(int j=0;j<i;j++)cout<<x[j];
+}

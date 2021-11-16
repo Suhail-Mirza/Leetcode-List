@@ -1,0 +1,58 @@
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> preorder;
+        vector<int> inorder;
+        vector<int> postorder;
+        
+        if(root == NULL){
+            return inorder;
+        }
+        
+        stack<Pair> s;
+        
+        Pair p;
+        p.node = root;
+        p.state = 1;
+        s.push(p);
+        
+        
+        while(!s.empty()){
+            Pair top = s.top();
+            
+            //state is 1
+            if(top.state == 1){
+                top.state++;
+                preorder.push_back(top.node -> val);
+                
+                if(top.node -> left != NULL){
+                    Pair newpair;
+                    newpair.node = top.node -> left;
+                    newpair.state = 1;
+                    s.push(p); 
+                }
+                
+            }
+
+            else if(top.state == 2){
+                
+                top.state++;
+                inorder.push_back(top.node -> val);
+                
+                //inorder.push_back(top.first)
+                
+                 if(top.node -> right != NULL){
+                    Pair newpair;
+                    newpair.node = top.node -> right;
+                    newpair.state = 2;
+                    s.push(p); 
+                }
+
+            }
+            else{ // post -> pop
+                postorder.push_back(top.node -> val);
+                s.pop();
+            }
+        }
+        return inorder;
+    }
+   
+};

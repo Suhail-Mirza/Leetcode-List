@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int maxProfit(int k, vector<int>& nums) {
+        int n=nums.size();
+        if(k==0||n==0||n==1)return 0;
+        if(k>=n/2){
+            int prof=0;
+            for(int i=1;i<n;i++){
+                if(nums[i-1]<nums[i])prof=prof+nums[i]-nums[i-1];
+            }return prof;
+        }
+        int dp[k+1][n];
+        memset(dp , 0 , sizeof(dp));
+        for(int i=1;i<k+1;i++){
+            int maxdiff=INT_MIN;
+            for(int j=1;j<n;j++){
+                if(i==0||j==0){dp[i][j]=0;continue;}
+                maxdiff=max(maxdiff,dp[i-1][j-1]-nums[j-1]);
+                dp[i][j]=max(dp[i][j-1],maxdiff+nums[j]);
+            }
+        }
+        return dp[k][n-1];}};

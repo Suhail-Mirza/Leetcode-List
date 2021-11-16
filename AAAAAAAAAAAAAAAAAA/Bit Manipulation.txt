@@ -1,0 +1,34 @@
+to count no of set bits    x&(x-1)
+
+to find negative of x     -x = ~x+1
+
+to find mask 011100100    00000000100
+     x&-x   or x&(~(x)+1)
+
+
+
+To find non repeating numbers 
+ find xor of xor with every number
+  find mask of xor    xor&-xor
+  check mask & arr[i]
+     if 0 then xor1 = xor1 xor arr[i]
+     if non zero xor 2 = xor2 xor arr[i]
+
+
+
+unordered_map<int,int> freq
+int n= tickets.size()
+for(int i=0;i<n;i++){
+	int mask=0;
+	for(int j=0;j<tickets[i].size();j++){
+	     mask = mask|(1<<ticket[i][j]);	
+	}
+	++freq[mask];
+}
+
+
+for(int i=0;i<1024;i++){
+	for(int j=i+1;j<1024;j++){
+     if(i|j==1023)count=count+freq[i]*freq[j];				
+	}
+}

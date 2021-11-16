@@ -1,0 +1,22 @@
+class MyCalendar {
+public:
+    vector<int> open;
+    vector<int> close;
+    
+    bool book(int start, int end) {
+        bool t=true;
+        for(int i=0;i<open.size();i++)
+        {
+            if(max(open[i], start) < min(close[i], end))
+                t=false;
+        }     
+      if(t==true){
+          open.push_back(start);
+          close.push_back(end);
+      }
+            return t;
+            
+            
+            
+            }
+};

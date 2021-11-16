@@ -1,0 +1,27 @@
+int longestMountain(vector<int>& a) {
+        int n=a.size();vector<int> vect;
+        for(int i=1;i<n-1;i++)
+        {
+            if(a[i]>a[i+1]&&a[i]>a[i-1])vect.push_back(i);
+        }    
+          if(vect.size()==0)return 0;int mx=0;
+        for(int i=0;i<vect.size();i++){
+            int l=vect[i]-1;
+            int r=vect[i]+1;
+            while(l>0){
+                    if(a[l]>a[l-1])l--;
+                else break;
+                
+            }
+            while(r<n-1){
+                if(a[r]>a[r+1])r++;
+                else break;
+            }
+            mx=max(mx,r-l+1);
+            
+        }
+            
+            
+            
+    return mx;
+    }

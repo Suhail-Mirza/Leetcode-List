@@ -1,0 +1,90 @@
+  //Cycle detection using BFS 
+#include <bits/stdc++.h>
+using namespace std;
+int cap[100][100];
+stack<int> s;
+
+void DFS2Util(int k,int n,int visited[]){
+	visited[k]=1;
+	cout<<k;
+	for(int i=0;i<n;i++){
+		if(cap[k][i]==2 && visited[i]==0)
+		DFS2Util(i,n,visited);
+	}
+	cout<<endl;
+}
+
+void DFS2(int n){
+	int visited[n];
+	for(int i=0;i<n;i++)
+	visited[i]=0;
+	int k=s.top();
+	s.pop();
+	DFS2Util(k,n,visited);
+	while(!s.empty()){
+		k=s.top();
+		s.pop();
+		if(visited[k]==0)
+		{
+			DFS2Util(k,n,visited);
+		}
+	}
+}
+
+void DFSUtil(int v,int n,int visited[]){
+	visited[v]=1;
+	for(int j=0;j<n;j++){
+		if((cap[v][j]==1) && (visited[j]==0))
+		DFSUtil(j,n,visited);
+	}
+	s.push(v);
+}
+
+
+void DFS(int n){
+	int visited[n];
+	for(int i=0;i<n;i++)
+	visited[i]=0;
+	for(int k=0;k<n;k++){
+		if(visited[k]==0){
+		DFSUtil(k,n,visited);}
+	}
+}
+
+void reverse(int n){
+	for(int i=0;i<n;i++){
+		for(int j=0;j<n;j++){
+			if(cap[i][j]==1)
+			{
+				cap[j][i]=2;
+				cap[i][j]=0;
+			}
+		}
+	}
+}
+
+int main() 
+{    int n;
+	cout<<"Enter the no of vertices"<<endl;
+	cin>>n;
+	cout<<"Enter the no of edges"<<endl;
+	int e;
+	cin>>e;
+	int f,t;
+	for(int i=0;i<n;i++)
+	for(int j=0;j<n;j++)
+	cap[i][j]=0;
+	cout<<"Enter the connections and weights"<<endl;
+	for(int i=0;i<e;i++){
+		cout<<"From"<<endl;
+		cin>>f;
+		cout<<"To"<<endl;
+		cin>>t;
+		cap[f][t]=1;
+	}
+	DFS(n);
+	reverse(n);
+	DFS2(n);
+	return 0; 
+} 
+
